@@ -1,0 +1,48 @@
+Steps to start using Python inside a Jupyter notebook on a Windows computer
+---------------------------------------------------------------------------
+
+1. If you are sure that there is no older Python version installed in your computer you can move to step 
+
+2. Otherwise, follow step 4, 5, and come back to step 2, after eventually removing the old version.
+
+2. Download from https://www.python.org/downloads/ the latest release of Python for windows; on June 14, 2020 it was Python 3.8.3 
+
+3. Run the installation program python-3.8.3 (probably in your Downloads folder) and make sure to check the two options on the bottom that say: Install launcher and Add Python to PATH. Take a note of the location of the installation, it should show that Python is installed inside your home directory. You will be able to remove Python from your computer just by deleting that folder.
+
+4. In the Search box type "cmd". This should start a "Command Prompt" windows where you see a prompt like: "C:\Users\Daniel>", where you can type commands. Try few of them like: "dir" or "date".
+
+5. You can run Python code right from the command prompt. Type "pyhton" and if everything was installed correctly, you should see a welcome message and a new prompt ">>>". You can exit Python and come back to the previous prompt with Ctr-Z. Type simple Python commands like "3+4" or "print("hello there")", press Enter and see if Python responds with what you expect. Leave Python by typing "exit()" and Enter, you should see prompt from step 4.
+
+6. Type "cd Documents" to change the current directory. The prompt should now show something like "C:\Users\Daniel\Documents>". Type "dir" again and you should have a list of files in this folder. Type the command  "mkdir Workspace" to create a new directory inside the current directory, and "cd Workspace" to navigate to the newly created folder. This is a place where you can organize your Python files and work. Place here this file, called "Jupyter_Instructions.txt", and also the attached file "Welcome_Jupyter.ipynb".
+
+7. The command "pip" manages additional python packages. We use this to install Jupyter. Type "pip install jupyter" and you will see pip starting to download everything that is required to make Jupyter work in your computer.
+
+8. If there are no errors during the installation you can start using jupyter, but before that, still in command prompt, install two more packages that you will use in the future with command "pip install scipy matplotlib".
+
+9. Start jupyter with the command: "jupyter notebook". You should see a new browser window showing the folder from where you have started Jupyter. You can create your own Python notebook with the button "New" in the upper right corner. When you are done, hit "Quit" button. If you want to come back, restart Command Prompt, navigate to your workspace with "cd" and restart with "jupyter notebook".
+
+10. For a tour of what Jupyter can do, open the "Welcome_Jupyter.ipynb" notebook.
+
+Resources:
+
+- Standard Pyhton documentation    https://www.python.org/doc/ 
+- Guides and learning resources    https://wiki.python.org/moin/BeginnersGuide
+- Example of notebooks, tutorials and learning materials: https://github.com/jupyter/jupyter/wiki/A-gallery-of-interesting-Jupyter-Notebooks
+- Note that Jupyter used to be called IPython
+- Python packages used in science:  https://docs.scipy.org/doc/scipy/reference/
+- Python package for scientific plots: https://matplotlib.org/tutorials/
+
+
+Things to try:
+
+- Jupyter provides a nicer console that can display graphics besides simple text. To use that you need to "pip install pyqt5" and and start it with "jupyter qtconsole"
+
+- The terminal within Jupyter works fine on MacOS or Linux, but in Windows needs a little help from a library called "pywinpty". Download a file called "pywinpty‑0.5.7‑cp38‑cp38‑win32.whl" from https://www.lfd.uci.edu/~gohlke/pythonlibs/#pywinpty and install it with "pip install pywinpty‑0.5.7‑cp38‑cp38‑win32.whl". If it does not work, probably you did not choose the right python or 32 versus 64 bytes version. If it works, you should be able to start a new Terminal from within Jupyter, which is a little bit more powerfull than the default one.
+
+- An improved version of Jupyter is under intense development. If you install it with "pip install jupyterlab", then it will be available for you to try it as: "jupyter lab"
+
+- By default, Jupyter notebook knows how to execute Python code, but many other kernels are available for use. For example, the programming language R can be use in a notebook by installing a special kernel in few simple steps, as explained here: https://irkernel.github.io/
+
+
+
+
