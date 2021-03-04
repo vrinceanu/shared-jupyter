@@ -1,0 +1,290 @@
+  
+ 
+  {
+   "cell_type": "markdown",
+   "id": "statutory-lodge",
+   "metadata": {},
+   "source": [
+    "## Collections and arrays\n",
+    "\n",
+    "We already made use of lists, vectors and array, since collections of elements are essential for almost any CP algorithm. Here some more details for Python, in general, and for Numpy, as a library specialized in working with arrays.\n",
+    "\n",
+    "### Tuple\n",
+    "If you have a comma separated set of values to the left of an equals sign, Python unpacks an iterable into it. You get an error if the lengths don't match exactly. You can also use *items to capture the rest of the items as a list. The reason why Python needs (,) tuples, when it already has [,] arrays, is that the tuples are **immutable**, meaning that they are \"constant\" variable, once defined, they cannot be changed anymore, in any way. This makes Python more efficient in dealing with collections of elements, since Python does not know ahead of time how big a list may be, or what is the type of elements, array operation are time consuming due to a lot of overhead and internal cooking."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "rolled-string",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "(a,) = [1]\n",
+    "c,d = [1,2]\n",
+    "begin, *middle, end = range(5)\n",
+    "print(a)\n",
+    "print(begin)\n",
+    "print(middle)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "gentle-angel",
+   "metadata": {},
+   "source": [
+    "Swapping of two variables in Python is done with the following idiom, without the need of any additional variable or space:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "designed-raleigh",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "c,d = d, c\n",
+    "print(c, d)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "excessive-priority",
+   "metadata": {},
+   "source": [
+    "Besides tuples and array, Python has support for several other types of collections, such as sequences, sets, dictionaries, and queues. Any custom type can become a collection if it implements a way of iterating over the collection. \n",
+    "\n",
+    "**List comprehension** provide a concise way to create lists. Common applications are to make new lists where each element is the result of some operations applied to each member of another sequence or iterable, or to create a subsequence of those elements that satisfy a certain condition.\n",
+    "\n",
+    "For example, assume we want to create a list of squares, like:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "offensive-secret",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "squares = []\n",
+    "for x in range(10):\n",
+    "    squares.append(x**2)\n",
+    "squares"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "worldwide-seattle",
+   "metadata": {},
+   "source": [
+    "Note that this creates (or overwrites) a variable named x that still exists after the loop completes. We can calculate the list of squares without any side effects using:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "basic-increase",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "squares = list(map(lambda x: x**2, range(10)))\n",
+    "squares"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "damaged-diamond",
+   "metadata": {},
+   "source": [
+    "Here we use a `lambda` function, which is essentially a function without a name, and without having to use the `def` statement. In other words, is a single-use function, we are not going to need to use this function (which squares its only argument) anywhere else in our program.\n",
+    "\n",
+    "Equivalently, we can use list comprehension to have the same thing in a more readable and concise way:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "motivated-monkey",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "squares = [x**2 for x in range(10)]\n",
+    "squares"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "understood-salon",
+   "metadata": {},
+   "source": [
+    "A list comprehension consists of brackets containing an expression followed by a for clause, then zero or more for or if clauses. The result will be a new list resulting from evaluating the expression in the context of the for and if clauses which follow it. For example, this listcomp combines the elements of two lists if they are not equal:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "wired-sensitivity",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "[(x, y) for x in [1,2,3] for y in [3,1,4] if x != y]"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "decreased-sally",
+   "metadata": {},
+   "source": [
+    "The initial expression in a list comprehension can be any arbitrary expression, including another list comprehension.\n",
+    "Consider the following example of a 3x4 matrix implemented as a list of 3 lists of length 4, where we use list comprehension to transpose rows and columns:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "neutral-gossip",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "matrix = [\n",
+    "    [1, 2, 3, 4],\n",
+    "    [5, 6, 7, 8],\n",
+    "    [9, 10, 11, 12]\n",
+    "]\n",
+    "[[row[i] for row in matrix] for i in range(4)]"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "finished-quest",
+   "metadata": {},
+   "source": [
+    "## Numpy\n",
+    "\n",
+    "Numpy is the most important numerical library available for Python. The numpy library improves the Python's efficiency in manipulating numerical lists and array, that represent mathematical concepts such as vectors, matrices or tensors. The basic concept in numpy is the **array**, which is different from a Python  list:\n",
+    "- arrays can be multidimensional, and have a `.shape` attribute\n",
+    "- arrays hold a specific data type (called `.dtype`). All elements have this type.\n",
+    "- arrays cannot change size inplace, the number of elements is fixed. However, an array can change its shape. Extending an array is expensive because a new array has to be created, and the old one needs to be copied over.\n",
+    "- Operations are element-wise\n",
+    "\n",
+    "> **Warning**: If you have used Matlab before, note that numpy arrays are slightly different. \n",
+    "\n",
+    "Arrays can be created from lists and tuples, and we can find the shape, data type and the size of the array:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "wired-raising",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "arr = np.array([1,2,3.0,4])\n",
+    "arr\n",
+    "print(arr.shape)\n",
+    "print(arr.dtype)\n",
+    "print(arr.size)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "sonic-parking",
+   "metadata": {},
+   "source": [
+    "All arithmetic operations are available for operating with numpy arrays, in an element-by-element way. Square of a vector, will square each element"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "civil-limit",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "arr ** 2"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "moderate-fisher",
+   "metadata": {},
+   "source": [
+    "Numpy has facilities for creating and manipulating arrays in a variety of ways"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "floppy-inventory",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "print(np.zeros(3))\n",
+    "print(np.ones(5))\n",
+    "print(np.ones(5, dtype=np.int8))\n",
+    "print(np.random.rand(2, 2))\n",
+    "print(np.sin(np.random.rand(2,2)))"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "atmospheric-cotton",
+   "metadata": {},
+   "source": [
+    "### Example: the Mandelbrot set\n",
+    "\n",
+    "The famous fractal is quite simple to construct, but can be quite beautiful. The algorithm is:\n",
+    "\n",
+    "> Make a grid of complex values $z_0$. Compute recursively the value $z_{n+1} = z_{n}^2 + c$, for each point in the grid and monitor the magnitude of $z_n$ after a certain number of iterations. "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "hourly-orleans",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import matplotlib.pyplot as plt\n",
+    "import numpy as np\n",
+    "# Size of the grid to evaluate on\n",
+    "size = (500, 500)\n",
+    "xs = np.linspace(-2, 2, size[0])\n",
+    "ys = np.linspace(-2, 2, size[1])# We need to make a grid where values x = real and y = imag\n",
+    "\n",
+    "x, y = np.meshgrid(xs, ys)\n",
+    "# We could also write: x, y = np.mgrid[-2:2:100j, -2:2:100j]\n",
+    "# Or use open grids and broadcasting\n",
+    "c = x + y * 1j\n",
+    "\n",
+    "# Verify that we have correctly constructed the real and imaginary parts\n",
+    "fig, axs = plt.subplots(1, 2)\n",
+    "axs[0].imshow(c.real)\n",
+    "axs[1].imshow(c.imag);"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "sexual-history",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "z = np.zeros(size, dtype=np.complex)\n",
+    "it_matrix = np.zeros(size, dtype=np.int)\n",
+    "for n in range(30):\n",
+    "    z = z ** 2 + c\n",
+    "    it_matrix[np.abs(z) < 2] = n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "positive-waters",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "plt.figure(figsize=(10, 10))\n",
+    "plt.imshow(it_matrix)"
+   ]
+  }
