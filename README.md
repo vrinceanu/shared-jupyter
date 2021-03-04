@@ -1,3 +1,13 @@
+<!---
+publishing instructions:
+
+jupyter nbconvert N06_Number_Crunching.ipynb --to 'html' --output-dir='docs'
+cp float_example.png docs/.
+git commit -a -m 'correction'
+git push
+-->
+
+
 # A Repository of Jupyter notebooks for Computational Physics
 
 Links to Jupyter notebooks rendered as webpages:
